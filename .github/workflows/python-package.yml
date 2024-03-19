@@ -31,4 +31,4 @@ jobs:
         echo "TOKEN=${{ secrets.TOKEN }}" >> $GITHUB_ENV
     - name: MelonChart
       run: |
-        main
+        python main.py
