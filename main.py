@@ -11,8 +11,8 @@ def upload_gitAction(data: str):
     try:
         token = os.environ.get('TOKEN')
         url = "https://api.github.com/repos/Pma10/MelonChartTop100/issues"
-        response = requests.post(url, json={"title": f"{datetime.now().strftime('%Y년%m월%d일')} 멜론차트 TOP100", "body": data}, headers={"Authorization": f"token {token}"})
-        response.raise_for_status()  # Raise an exception for 4XX and 5XX status codes
+        response = requests.post(url, json={"title": f"{datetime.now().strftime('%Y년 %m월 %d일')} 멜론차트 TOP100", "body": data}, headers={"Authorization": f"token {token}"})
+        response.raise_for_status()
         print('업로드 성공')
     except requests.exceptions.RequestException as e:
         print('업로드 실패:', e)
@@ -32,6 +32,6 @@ with open(f'melon_chart/{datetime.now().strftime("%Y년%m월%d일")}.txt', 'a', 
     titles, authors = get_melon_chart()
     for rank in range(len(titles)):
         title_name = titles[rank].replace('\n', '').strip()
-        f.write(f"TOP {rank + 1} {title_name} - {authors[rank]}\n")
+        f.write(f"TOP {rank + 1} {title_name} / {authors[rank]}\n")
 
-upload_gitAction("\n".join([f"TOP {rank + 1} {title_name} - {authors[rank]}" for rank, (title_name, author) in enumerate(zip(titles, authors))]))
+upload_gitAction("\n".join([f"TOP {rank + 1} {title_name} / {authors[rank]}" for rank, (title_name, author) in enumerate(zip(titles, authors))]))
