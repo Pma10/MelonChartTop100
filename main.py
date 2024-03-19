@@ -26,4 +26,3 @@ with open(f'melon_chart/{datetime.now().strftime("%Y년%m월%d일")}.txt','a',en
     for rank in range(len(titles)):
         title_name = titles[rank].replace('\n','').strip()
         f.write(f"TOP {rank + 1} {title_name} - {authors[rank]}\n")
-
