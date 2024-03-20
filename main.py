@@ -28,10 +28,12 @@ def get_melon_chart():
         print('멜론 차트 데이터를 가져오는 데 실패했습니다:', e)
         return [], []
 
+charts = []
 with open(f'melon_chart/{datetime.now().strftime("%Y년%m월%d일")}.txt', 'a', encoding='utf-8') as f:
     titles, authors = get_melon_chart()
     for rank in range(len(titles)):
         title_name = titles[rank].replace('\n', '').strip()
+        charts.append(f"TOP {rank + 1} {title_name} / {authors[rank]}\n")
         f.write(f"TOP {rank + 1} {title_name} / {authors[rank]}\n")
 
-upload_gitAction("\n".join([f"TOP {rank + 1} {title_name} / {authors[rank]}" for rank, (title_name, author) in enumerate(zip(titles, authors))]))
+upload_gitAction("".join(charts))
